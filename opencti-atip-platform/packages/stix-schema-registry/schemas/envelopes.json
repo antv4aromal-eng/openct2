@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://opencti.local/schemas/atip-envelopes.json",
+  "title": "ATIP Kafka Streaming Envelopes",
+  "definitions": {
+    "IngestEnvelope": {
+      "type": "object",
+      "required": ["envelope_id", "source_connector_id", "timestamp", "payload"],
+      "properties": {
+        "envelope_id": { "type": "string" },
+        "source_connector_id": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "payload": { "$ref": "stix_bundle.json#" }
+      }
+    },
+    "EnrichmentRequest": {
+      "type": "object",
+      "required": ["request_id", "target_stix_id", "stix_type", "value", "requested_by"],
+      "properties": {
+        "request_id": { "type": "string" },
+        "target_stix_id": { "type": "string" },
+        "stix_type": { "type": "string" },
+        "value": { "type": "string" },
+        "depth": { "type": "integer", "default": 1 },
+        "requested_by": { "type": "string" },
+        "created_at": { "type": "string" }
+      }
+    },
+    "GraphCDCEvent": {
+      "type": "object",
+      "required": ["event_id", "operation", "entity_id", "stix_type", "timestamp"],
+      "properties": {
+        "event_id": { "type": "string" },
+        "operation": { "type": "string", "enum": ["CREATE", "UPDATE", "MERGE", "DELETE"] },
+        "entity_id": { "type": "string" },
+        "stix_type": { "type": "string" },
+        "confidence_before": { "type": "integer" },
+        "confidence_after": { "type": "integer" },
+        "corroborations_count": { "type": "integer" },
+        "timestamp": { "type": "string" }
+      }
+    }
+  }
+}

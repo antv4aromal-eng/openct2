@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://docs.oasis-open.org/cti/stix/v2.1/schemas/stix-bundle.json",
+  "title": "STIX 2.1 Bundle Schema",
+  "type": "object",
+  "required": ["type", "id", "objects"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "bundle"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^bundle--[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+    },
+    "spec_version": {
+      "type": "string",
+      "default": "2.1"
+    },
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "id"],
+        "properties": {
+          "type": { "type": "string" },
+          "id": { "type": "string" },
+          "created": { "type": "string" },
+          "modified": { "type": "string" },
+          "confidence": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "object_marking_refs": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "x_atip_connector": {
+      "type": "object",
+      "properties": {
+        "connector_id": { "type": "string" },
+        "connector_name": { "type": "string" },
+        "confidence": { "type": "integer" },
+        "timestamp": { "type": "string" }
+      }
+    }
+  }
+}

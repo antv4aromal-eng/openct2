@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "atip-sdk"
+version = "0.1.0"
+description = "Core Python SDK for OpenCTI Autonomous Threat Intelligence Platform (ATIP)"
+readme = "README.md"
+authors = [
+    { name = "OpenCTI ATIP Core Team", email = "atip-core@opencti.local" }
+]
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+dependencies = [
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "redis>=5.0.0",
+    "httpx>=0.25.0",
+    "aiokafka>=0.10.0",
+    "stix2>=3.0.1",
+    "pyyaml>=6.0.1",
+    "structlog>=23.2.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-mock>=3.11.0",
+    "black>=23.9.0",
+    "ruff>=0.1.0"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/atip_sdk"]
